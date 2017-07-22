@@ -1,0 +1,18 @@
+#!/bin/bash
+./format
+./make
+while [ true ]; do
+  res=$(md5sum Main.elm)
+  while [ true ]; do
+    new=$(md5sum Main.elm)
+    if [ "$res" != "$new" ]; then
+      ./format
+      ./make
+      res="$new"
+      echo "updated: " `date`
+      break
+    else
+      sleep 5
+    fi
+  done
+done
