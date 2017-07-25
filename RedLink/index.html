@@ -1,8 +1,11 @@
-<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Red Link</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
 </head>
 <body>
 <main></main>
@@ -11,8 +14,12 @@
     Elm.Main.embed(document.getElementsByTagName('main')[0]);
 </script>
 <style type="text/css">
+    body, main {
+        margin: 0;
+    }
+
     main * {
-        outline: 1px solid blue;
+        /*outline: 1px solid blue;*/
     }
 </style>
 </body>

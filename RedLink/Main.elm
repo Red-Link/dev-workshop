@@ -1,7 +1,7 @@
 module Main exposing (..)
 
-import Html exposing (Html, body, h1, node, text)
-import Html.Attributes exposing (size, style)
+import Html exposing (Html, body, div, h1, node, span, text)
+import Html.Attributes exposing (style)
 
 
 type alias Model =
@@ -28,20 +28,59 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    body [ bodyStyle ]
-        [ h1 [] [ text "Red-Link" ]
-        , viewHeader model
+    node "app"
+        [ appStyle ]
+        [ viewHeader model
         ]
 
 
-bodyStyle =
+appStyle =
     style
-        [ ( "margin", "8px" )
+        [ ( "display", "block" )
+        , ( "padding", "8px" )
+          --, ( "width", "100%" )
+          --, ( "height", "100%" )
         ]
 
 
 viewHeader model =
-    node "header" [] [ text "I am header" ]
+    node "header"
+        [ headerStyle ]
+        [ headerText "Red-Link"
+        , menuButton model
+        ]
+
+
+headerText content =
+    span
+        [ style
+            [ ( "color", "white" )
+            , ( "font-weight", "bold" )
+            , ( "font-family", "sans-serif" )
+            ]
+        ]
+        [ text content ]
+
+
+headerStyle =
+    style [ ( "background-color", "red" ) ]
+
+
+menuButton model =
+    node "menuButton"
+        [ style [ ( "background-color", "pink" ) ] ]
+        (List.repeat 3
+            (div
+                [ style
+                    [ ( "margin", "4px 8px" )
+                    , ( "background-color", "white" )
+                    , ( "width", "20px" )
+                    , ( "height", "4px" )
+                    ]
+                ]
+                []
+            )
+        )
 
 
 subscriptions : Model -> Sub Msg
