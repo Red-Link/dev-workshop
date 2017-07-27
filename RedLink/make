@@ -1,2 +1,2 @@
 #!/bin/bash
-elm-make Main.elm --output Main.js
+elm-make "$1.elm" --output "$1.js"

@@ -1,18 +1,16 @@
 #!/bin/bash
-./format
-./make
+./dev Main
 while [ true ]; do
-  res=$(md5sum Main.elm)
+  old=$(stat -c %y Main.elm)
   while [ true ]; do
-    new=$(md5sum Main.elm)
-    if [ "$res" != "$new" ]; then
-      ./format
-      ./make
-      res="$new"
+    new=$(stat -c %y Main.elm)
+    if [ "$old" != "$new" ]; then
+      ./dev Main
+      old="$new"
       echo "updated: " `date`
       break
     else
-      sleep 5
+      sleep 4
     fi
   done
 done

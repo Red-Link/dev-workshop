@@ -1,1 +1,2 @@
-elm-format --yes Main.elm
+#!/bin/bash
+elm-format --yes "$1.elm"
