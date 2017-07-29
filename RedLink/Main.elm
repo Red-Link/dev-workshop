@@ -5,7 +5,7 @@ import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import Svg exposing (svg)
 import Svg.Attributes
-import Theme exposing (backgroundColor)
+import Theme exposing (..)
 
 
 type alias Model =
@@ -51,15 +51,6 @@ view model =
         )
 
 
-appStyle =
-    style
-        [ ( "display", "block" )
-          --, ( "padding", "8px" )
-          --, ( "width", "100%" )
-          --, ( "height", "100%" )
-        ]
-
-
 viewHeader model =
     node "header"
         [ headerStyle ]
@@ -91,8 +82,7 @@ headerText content =
         [ style
             [ ( "color", "white" )
             , ( "font-weight", "bold" )
-            , ( "font-family", "sans-serif" )
-            , ( "line-height", "28px" )
+            , ( "line-height", toString headerHeight ++ "px" )
             , ( "vertical-align", "center" )
             ]
         ]
@@ -103,7 +93,7 @@ headerStyle =
     style
         [ ( "background-color", backgroundColor )
         , ( "display", "block" )
-        , ( "height", "28px" )
+        , ( "height", toString headerHeight ++ "px" )
         , ( "padding-left", "4px" )
         ]
 
@@ -153,6 +143,7 @@ viewMenu model =
             [ ( "background-color", backgroundColor )
             , ( "height", "100%" )
             , ( "margin", "0" )
+            , ( "margin-bottom", toString headerHeight ++ "px" )
             , ( "display", "flex" )
             , ( "flex-direction", "row" )
             , ( "align-items", "center" )
@@ -176,6 +167,8 @@ viewMenu model =
                                 else
                                     "1.25em"
                               )
+                            , ( "color", "white" )
+                            , ( "font-weight", "bold" )
                             ]
                         ]
                         [ text content ]

@@ -1,24 +1,22 @@
 #!/bin/bash
 ./dev Theme
 ./dev Main
+oldTheme=$(stat -c %y Theme.elm)
+oldMain=$(stat -c %y Main.elm)
 while [ true ]; do
-  oldTheme=$(stat -c %y Theme.elm)
-  oldMain=$(stat -c %y Main.elm)
-  while [ true ]; do
-    newTheme=$(stat -c %y Theme.elm)
-    newMain=$(stat -c %y Main.elm)
-    if [ "$oldTheme" != "$newTheme" ]; then
-      ./dev Theme
-      oldTheme="$newTheme"
-      echo "updated Theme: " `date`
-      break
-    elif [ "$oldMain" != "$newMain" ]; then
-      ./dev Main
-      oldMain="$newMain"
-      echo "updated Main: " `date`
-      break
-    else
-      sleep 4
-    fi
-  done
+  newTheme=$(stat -c %y Theme.elm)
+  newMain=$(stat -c %y Main.elm)
+  if [ "$oldTheme" != "$newTheme" ]; then
+    ./dev Theme && ./build Main
+    oldTheme="$newTheme"
+    echo "updated Theme: " `date`
+    break
+  elif [ "$oldMain" != "$newMain" ]; then
+    ./dev Main
+    oldMain="$newMain"
+    echo "updated Main: " `date`
+    break
+  else
+    sleep 4
+  fi
 done

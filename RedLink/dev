@@ -1,2 +1,2 @@
 #!/bin/bash
-./format $@ && ./make $@
+./format $@ && ./build $@
