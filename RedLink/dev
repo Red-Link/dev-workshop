@@ -1,2 +1,11 @@
 #!/bin/bash
-./format $@ && ./build $@
+useTmux=$(hash tmux)2>/dev/null && [ "$TMUX" == "" ]
+if [ "$useTmux" ]; then
+  tmux start
+  tmux new -dP -s elm-reactor elm-reactor
+  tmux new -dP -s monitor ./monitor
+  tmux attach -t monitor
+else
+  elm-reactor &
+  ./monitor
+fi
