@@ -5,6 +5,7 @@ import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import Svg exposing (svg)
 import Svg.Attributes
+import Theme exposing (backgroundColor)
 
 
 type alias Model =
@@ -100,7 +101,7 @@ headerText content =
 
 headerStyle =
     style
-        [ ( "background-color", "red" )
+        [ ( "background-color", backgroundColor )
         , ( "display", "block" )
         , ( "height", "28px" )
         , ( "padding-left", "4px" )
@@ -113,27 +114,23 @@ crossSvg =
         , Svg.Attributes.height "28"
         , Svg.Attributes.viewBox "0 0 28 28"
         ]
-        [ Svg.line
-            [ Svg.Attributes.fill "none"
-            , Svg.Attributes.stroke "white"
-            , Svg.Attributes.strokeWidth "4"
-            , Svg.Attributes.x1 "4"
-            , Svg.Attributes.y1 "4"
-            , Svg.Attributes.x2 "24"
-            , Svg.Attributes.y2 "24"
+        (let
+            showLine startX startY endX endY =
+                Svg.line
+                    [ Svg.Attributes.fill "none"
+                    , Svg.Attributes.stroke "white"
+                    , Svg.Attributes.strokeWidth "4"
+                    , Svg.Attributes.x1 (toString startX)
+                    , Svg.Attributes.y1 (toString startY)
+                    , Svg.Attributes.x2 (toString endX)
+                    , Svg.Attributes.y2 (toString endY)
+                    ]
+                    []
+         in
+            [ showLine 4 4 24 24
+            , showLine 4 24 24 4
             ]
-            []
-        , Svg.line
-            [ Svg.Attributes.fill "none"
-            , Svg.Attributes.stroke "white"
-            , Svg.Attributes.strokeWidth "4"
-            , Svg.Attributes.x1 "4"
-            , Svg.Attributes.y1 "24"
-            , Svg.Attributes.x2 "24"
-            , Svg.Attributes.y2 "4"
-            ]
-            []
-        ]
+        )
 
 
 menuLines =
@@ -152,14 +149,44 @@ menuLines =
 
 viewMenu model =
     node "menu"
-        []
-        [ ul [ style [ ( "list-style-type", "none" ) ] ]
-            [ li [] [ text "Fate Angle" ]
-            , li [] [ text "Love Formula" ]
-            , li [] [ text "Secrete Wall" ]
-            , li [] [ text "Draw & Guess" ]
-            , li [] [ text "Events" ]
+        [ style
+            [ ( "background-color", backgroundColor )
+            , ( "height", "100%" )
+            , ( "margin", "0" )
+            , ( "display", "flex" )
+            , ( "flex-direction", "row" )
+            , ( "align-items", "center" )
             ]
+        ]
+        [ ul
+            [ style
+                [ ( "list-style-type", "none" )
+                , ( "margin", "0" )
+                ]
+            ]
+            (let
+                showItem isLast content =
+                    li
+                        [ style
+                            [ ( "font-size", "xx-large" )
+                            , ( "padding", "8px" )
+                            , ( "margin-bottom"
+                              , if isLast then
+                                    "0"
+                                else
+                                    "1.25em"
+                              )
+                            ]
+                        ]
+                        [ text content ]
+             in
+                [ showItem False "Fate Angle"
+                , showItem False "Love Formula"
+                , showItem False "Secrete Wall"
+                , showItem False "Draw & Guess"
+                , showItem True "Events"
+                ]
+            )
         ]
 
 
