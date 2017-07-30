@@ -3,8 +3,9 @@ hash tmux 2>/dev/null
 if [ $? == 0 ] && [ "$TMUX" == "" ]; then
   tmux start
   tmux new -dP -s elm-reactor elm-reactor
-  ./start-monitor
 else
   elm-reactor &
-  ./start-monitor
 fi
+
+./start-monitor
+./monitor-html &

@@ -1,2 +1,2 @@
 #!/bin/bash
-rm -f monitor.tmp
+rm -f monitor.lock

@@ -1,2 +1,2 @@
 #!/bin/bash
-elm-make "$1.elm" --output "$1.js"
+elm-make "src/$1.elm" --output "dist/$1.js"

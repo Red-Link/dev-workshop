@@ -1,6 +1,6 @@
-module AppLayout exposing (..)
+module App.Layout exposing (..)
 
-import AppTheme
+import App.Theme
 import Html exposing (span, text)
 import Html.Attributes exposing (style)
 import Style exposing (..)
@@ -35,7 +35,7 @@ headerHeightUnit =
 
 
 headerTextLayout =
-    [ color AppTheme.textColor
+    [ color App.Theme.textColor
     , fontBold
     , lineHeight headerHeightUnit
     , verticalAlign center
@@ -47,7 +47,7 @@ headerText content =
 
 
 headerLayout =
-    [ backgroundColor AppTheme.backgroundColor
+    [ backgroundColor App.Theme.backgroundColor
     , display block
     , height headerHeightUnit
     , paddingLeft standardGapUnit
@@ -63,7 +63,7 @@ appLayout =
 
 
 menuLayout =
-    [ backgroundColor AppTheme.backgroundColor
+    [ backgroundColor App.Theme.backgroundColor
     , height full
     , margin zero
     , marginBottom headerHeightUnit

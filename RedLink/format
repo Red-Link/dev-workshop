@@ -1,2 +1,2 @@
 #!/bin/bash
-elm-format --yes "$1.elm"
+elm-format --yes "src/$1.elm"

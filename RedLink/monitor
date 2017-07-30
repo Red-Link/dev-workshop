@@ -1,18 +1,18 @@
 #!/bin/bash
-RUNNING="./monitor.tmp"
+RUNNING="./monitor.lock"
 
 touch "$RUNNING"
 
 MOD="$1"
-FILE="src/$1"
+FILE="src/$1.elm"
 DEP="src/$2"
 
-./format-build "$FILE"
-old=$(./hash "$FILE.elm")
+./format-build "$MOD"
+old=$(./hash "$FILE")
 while [ -f "$RUNNING" ]; do
-  new=$(./hash "$FILE.elm")
+  new=$(./hash "$FILE")
   if [ "$old" != "$new" ]; then
-    ./format-build "$FILE"
+    ./format-build "$MOD"
     old="$new"
     echo "updated $MOD:" `date`
   else

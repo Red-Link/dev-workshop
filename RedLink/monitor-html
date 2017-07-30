@@ -1,0 +1,18 @@
+#!/bin/bash
+RUNNING="./monitor.lock"
+
+touch "$RUNNING"
+
+if [ ! -d dist/index.html ]; then
+  cp src/index.html dist/index.html
+fi
+
+old=$(./hash src/index.html)
+while [ -f "$RUNNING" ]; do
+  new=$(./hash dist/index.html)
+  if [ "$old" != "$new" ]; then
+    cp src/index.html dist/index.html
+  else
+    sleep 4
+  fi
+done
