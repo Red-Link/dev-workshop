@@ -15,6 +15,9 @@ while [ -f "$RUNNING" ]; do
     ./format-build "$MOD"
     old="$new"
     echo "updated $MOD:" `date`
+    if [ "$MOD" != "Main" ]; then
+      ./build Main
+    fi
   else
     sleep 4
   fi

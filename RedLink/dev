@@ -8,4 +8,3 @@ else
 fi
 
 ./start-monitor
-./monitor-html &
