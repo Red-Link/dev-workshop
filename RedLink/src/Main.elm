@@ -55,7 +55,7 @@ view model =
 
 viewHeader model =
     node "header"
-        [ headerStyle ]
+        [ style AppLayout.headerLayout ]
         [ AppLayout.headerText App.name
         , let
             theStyle =
