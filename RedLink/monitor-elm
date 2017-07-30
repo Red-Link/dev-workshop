@@ -9,7 +9,7 @@ DEP="src/$2"
 
 ./format-build "$MOD"
 old=$(./hash "$FILE")
-while [ -f "$RUNNING" ]; do
+while [ true ]; do
   new=$(./hash "$FILE")
   if [ "$old" != "$new" ]; then
     ./format-build "$MOD"
@@ -18,8 +18,10 @@ while [ -f "$RUNNING" ]; do
     if [ "$MOD" != "Main" ]; then
       ./build Main
     fi
-  else
+  elif [ -f "$RUNNING" ]; then
     sleep 4
+  else
+    break
   fi
 done
 echo "stopped monitor on $MOD."

@@ -8,13 +8,16 @@ if [ ! -d dist/index.html ]; then
 fi
 
 old=$(./hash src/index.html)
-while [ -f "$RUNNING" ]; do
+while [ true ]; do
   new=$(./hash src/index.html)
   if [ "$old" != "$new" ]; then
     cp src/index.html dist/index.html
     old="$new"
     echo "updated index.html"
-  else
+  elif [ -f "$RUNNING" ]; then
     sleep 4
+  else
+    break
   fi
 done
+echo "stopped monitor on index.html"
