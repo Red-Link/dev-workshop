@@ -1,23 +1,22 @@
 #!/bin/bash
-./format-build Theme
-./format-build Main
-oldTheme=$(stat -c %y Theme.elm)
-oldMain=$(stat -c %y Main.elm)
-while [ true ]; do
-  newTheme=$(stat -c %y Theme.elm)
-  if [ "$oldTheme" != "$newTheme" ]; then
-    ./format-build Theme && ./build Main
-    oldTheme="$newTheme"
-    echo "updated Theme: " `date`
-    break
-  fi
-  newMain=$(stat -c %y Main.elm)
-  if [ "$oldMain" != "$newMain" ]; then
-    ./format-build Main
-    oldMain="$newMain"
-    echo "updated Main: " `date`
-    break
+RUNNING="./monitor.tmp"
+
+touch "$RUNNING"
+
+MOD="$1"
+FILE="src/$1"
+DEP="src/$2"
+
+./format-build "$FILE"
+old=$(./hash "$FILE.elm")
+while [ -f "$RUNNING" ]; do
+  new=$(./hash "$FILE.elm")
+  if [ "$old" != "$new" ]; then
+    ./format-build "$FILE"
+    old="$new"
+    echo "updated $MOD:" `date`
   else
     sleep 4
   fi
 done
+echo "stopped monitor on $MOD."

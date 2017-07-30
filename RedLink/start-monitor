@@ -1,0 +1,2 @@
+#!/bin/bash
+find src -name '*.elm' | sed 's,src/,,' | sed 's,\.elm,,' | xargs -I {} echo ./monitor {} \& | bash

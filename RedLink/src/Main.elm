@@ -1,11 +1,13 @@
 module Main exposing (..)
 
+import App
 import Html exposing (Html, body, div, h1, li, node, span, text, ul)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import Svg exposing (svg)
 import Svg.Attributes
-import Theme exposing (..)
+import AppLayout
+import Style exposing (..)
 
 
 type alias Model =
@@ -40,7 +42,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     node "app"
-        [ appStyle ]
+        [ style AppLayout.appLayout ]
         (if model.isShowMenu then
             [ viewHeader model
             , viewMenu model
@@ -54,7 +56,7 @@ view model =
 viewHeader model =
     node "header"
         [ headerStyle ]
-        [ headerText "Red-Link"
+        [ AppLayout.headerText App.name
         , let
             theStyle =
                 style
@@ -74,27 +76,6 @@ viewHeader model =
                     , onClick ShowMenu
                     ]
                     menuLines
-        ]
-
-
-headerText content =
-    span
-        [ style
-            [ ( "color", "white" )
-            , ( "font-weight", "bold" )
-            , ( "line-height", toString headerHeight ++ "px" )
-            , ( "vertical-align", "center" )
-            ]
-        ]
-        [ text content ]
-
-
-headerStyle =
-    style
-        [ ( "background-color", backgroundColor )
-        , ( "display", "block" )
-        , ( "height", toString headerHeight ++ "px" )
-        , ( "padding-left", "4px" )
         ]
 
 
@@ -139,16 +120,7 @@ menuLines =
 
 viewMenu model =
     node "menu"
-        [ style
-            [ ( "background-color", backgroundColor )
-            , ( "height", "100%" )
-            , ( "margin", "0" )
-            , ( "margin-bottom", toString headerHeight ++ "px" )
-            , ( "display", "flex" )
-            , ( "flex-direction", "row" )
-            , ( "align-items", "center" )
-            ]
-        ]
+        [ style AppLayout.menuLayout ]
         [ ul
             [ style
                 [ ( "list-style-type", "none" )
