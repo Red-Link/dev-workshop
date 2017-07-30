@@ -12,6 +12,7 @@ while [ -f "$RUNNING" ]; do
   new=$(./hash dist/index.html)
   if [ "$old" != "$new" ]; then
     cp src/index.html dist/index.html
+    old="$new"
     echo "updated index.html"
   else
     sleep 4
