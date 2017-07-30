@@ -9,7 +9,7 @@ fi
 
 old=$(./hash src/index.html)
 while [ -f "$RUNNING" ]; do
-  new=$(./hash dist/index.html)
+  new=$(./hash src/index.html)
   if [ "$old" != "$new" ]; then
     cp src/index.html dist/index.html
     old="$new"
