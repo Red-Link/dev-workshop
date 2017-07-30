@@ -35,7 +35,11 @@ update msg model =
             { model | isShowMenu = False } ! []
 
         ClickFeature feature ->
-            { model | currentFeature = feature } ! []
+            { model
+                | currentFeature = feature
+                , isShowMenu = False
+            }
+                ! []
 
 
 subscriptions : Model -> Sub Msg
