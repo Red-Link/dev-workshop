@@ -1,10 +1,9 @@
 #!/bin/bash
-useTmux=$(hash tmux)2>/dev/null && [ "$TMUX" == "" ]
-if [ "$useTmux" ]; then
+hash tmux 2>/dev/null
+if [ $? == 0 ] && [ "$TMUX" == "" ]; then
   tmux start
   tmux new -dP -s elm-reactor elm-reactor
-  tmux new -dP -s monitor ./start-monitor
-  tmux attach -t monitor
+  ./start-monitor
 else
   elm-reactor &
   ./start-monitor
