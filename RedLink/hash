@@ -1,2 +1,2 @@
 #!/bin/bash
-stat -c %y $1
+stat -c %Y $1
